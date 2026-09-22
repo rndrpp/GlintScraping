@@ -10,6 +10,7 @@ CLI flag.
 """
 
 import argparse
+import getpass
 import logging
 import os
 import smtplib
@@ -301,8 +302,8 @@ def resolve_config(args):
 
         # App password: environment variable ONLY (never a CLI flag).
         cfg.sender_apppass = os.getenv('GLINTS_APP_PASSWORD')
-        if not cfg.sender_apppass:
-            cfg.sender_apppass = _prompt_if_tty('-- Sender gmail app password: ')
+        if not cfg.sender_apppass and sys.stdin.isatty():
+            cfg.sender_apppass = getpass.getpass('-- Sender gmail app password: ')
         if not cfg.sender_apppass:
             raise SystemExit(
                 'Error: Gmail app password is required for notifications. '
@@ -419,7 +420,7 @@ def send_startup_email(cfg):
                     'Error: failed to send startup email; check sender/receiver/app password.')
             cfg.sender_gmail = input('-- Sender gmail: ')
             cfg.sender_apppass = os.getenv('GLINTS_APP_PASSWORD') or \
-                input('-- Sender gmail app password: ')
+                getpass.getpass('-- Sender gmail app password: ')
             cfg.receiver = input('-- Reciever gmail: ')
 
 
