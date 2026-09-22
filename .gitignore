@@ -1,0 +1,15 @@
+# Generated scraper output
+detail_urls.csv
+ScrapedData.csv
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets / config
+.env

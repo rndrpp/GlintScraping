@@ -1,0 +1,4 @@
+# Development / test dependencies.
+# Install with: PYENV_VERSION=3.12.13 python -m pip install -r requirements-dev.txt
+-r requirements.txt
+pytest
